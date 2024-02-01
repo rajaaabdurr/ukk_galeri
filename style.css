@@ -1,0 +1,12 @@
+/* Add your custom styles here */
+
+.container {
+    max-width: 800px; /* Adjust the maximum width based on your design */
+}
+
+.img-thumbnail {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Add more styles as needed */
