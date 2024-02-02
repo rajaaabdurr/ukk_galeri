@@ -74,7 +74,11 @@ if (!isset($_SESSION['userid'])) {
     <button type="submit" class="btn btn-success"><i class="bi bi-plus-circle"></i><b> Tambah</b></button>
     </form>
 
-    <table class="table table-bordered table-hover shadow-lg mt-4 mb-5">
+    <div class="card border-secondary mt-4 mb-5">
+            <div class="card-header bg-dark text-white ">
+                <h5><b>Galeri Foto</b></h5>
+            </div>
+    <table class="table table-bordered table-hover shadow-lg ">
         <thead class="thead-dark">
             <tr>
                 <th>ID</th>
@@ -121,6 +125,7 @@ if (!isset($_SESSION['userid'])) {
         </tbody>
         
     </table> 
+    </div>
     <br>
     
     <footer class="bg-dark text-white fixed-bottom text-center py-1">

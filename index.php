@@ -12,7 +12,7 @@
 </head>
 
 <style>
-    p {
+    .p {
         color: #495057;
         font-family:sans-serif;
     }
@@ -57,7 +57,7 @@
         ?>
     </nav>
 
-    <section class="container mt-4 mb-4">
+    <section class="container mt-4 col-mb-4">
         <!-- Tambahkan margin-bottom di sini -->
         <h1>Halaman Home</h1>
         <p>Di sini, kami mengundang Anda untuk menjelajahi keindahan yang tertangkap dalam setiap momen. Melalui lensa kami, setiap foto adalah kisah yang menceritakan perjalanan, kebahagiaan, dan keajaiban yang ada di sekitar kita.</p>
@@ -65,8 +65,8 @@
         <p>Kami percaya bahwa foto memiliki kekuatan untuk membangkitkan kenangan, menginspirasi, dan menyampaikan emosi tanpa kata. Dari keindahan alam hingga momen-momen berharga dalam kehidupan sehari-hari, setiap gambar adalah ungkapan visual dari kehidupan yang berwarna.</p>
 
         <p>Mari nikmati setiap detiknya, dan biarkan galeri foto ini menjadi perjalanan visual yang membawa Anda ke dalam dunia yang penuh warna dan keajaiban. Terima kasih telah berbagi momen-momen ini bersama kami. Selamat menikmati!</p>
-        <div class="card">
-            <div class="card-header bg-dark text-white">
+        <div class="card border-secondary  mt-3">
+            <div class="card-header bg-dark text-white ">
                 <h5><b>Galeri Foto</b></h5>
             </div>
 

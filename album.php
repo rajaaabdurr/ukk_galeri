@@ -57,8 +57,11 @@ if (!isset($_SESSION['userid'])) {
 
             </b>
         </form>
-
-        <table class="table table-bordered table-hover shadow-lg mt-3">
+        <div class="card border-secondary mt-3">
+            <div class="card-header bg-dark text-white ">
+                <h5><b>Galeri Foto</b></h5>
+            </div>
+        <table class="table table-bordered table-hover shadow-lg border-secondary">
             <thead class="thead-dark ">
                 <tr>
                     <th>ID</th>
@@ -90,6 +93,7 @@ if (!isset($_SESSION['userid'])) {
                 ?>
             </tbody>
         </table>
+        </div>
         <br>
         
         <footer class="bg-dark text-white fixed-bottom text-center py-1 ">
