@@ -14,7 +14,7 @@
 <style>
     .p {
         color: #495057;
-        font-family:sans-serif;
+        font-family: sans-serif;
     }
 </style>
 
@@ -65,63 +65,89 @@
         <p>Kami percaya bahwa foto memiliki kekuatan untuk membangkitkan kenangan, menginspirasi, dan menyampaikan emosi tanpa kata. Dari keindahan alam hingga momen-momen berharga dalam kehidupan sehari-hari, setiap gambar adalah ungkapan visual dari kehidupan yang berwarna.</p>
 
         <p>Mari nikmati setiap detiknya, dan biarkan galeri foto ini menjadi perjalanan visual yang membawa Anda ke dalam dunia yang penuh warna dan keajaiban. Terima kasih telah berbagi momen-momen ini bersama kami. Selamat menikmati!</p>
-        <div class="card border-secondary  mt-3">
-            <div class="card-header bg-dark text-white ">
-                <h5><b>Galeri Foto</b></h5>
-            </div>
 
-            <div class="card-body">
-                <div class="row">
-                    <?php
-                    include "koneksi.php";
-                    $sql = mysqli_query($conn, "select * from foto,user where foto.userid=user.userid");
-                    while ($data = mysqli_fetch_array($sql)) {
-                    ?>
-                        <div class="col-md-4 mb-4">
-                            <div class="card shadow-lg border-secondary">
-                                <a href="gambar/<?= $data['lokasifile'] ?>" target="_blank">
-                                    <img src="gambar/<?= $data['lokasifile'] ?>" alt="<?= $data['judulfoto'] ?>" class="card-img-top" style="object-fit: cover; width: 100%; height: 200px;">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $data['judulfoto'] ?></h5>
-                                    <p class="card-text"><?= $data['deskripsifoto'] ?></p>
-                                    <p class="card-text"><strong>Uploader: </strong><?= $data['namalengkap'] ?></p>
-                                    <p class="card-text"><strong>Jumlah Like: </strong>
-                                        <?php
-                                        $fotoid = $data['fotoid'];
-                                        $sql2 = mysqli_query($conn, "select * from likefoto where fotoid='$fotoid'");
-                                        echo mysqli_num_rows($sql2);
-                                        ?>
-                                    </p>
-                                    <a href="like.php?fotoid=<?= $data['fotoid'] ?>" class="btn btn-danger"><i class="bi bi-heart-fill"></i> Like</a>
-                                    <a href="komentar.php?fotoid=<?= $data['fotoid'] ?>" class="btn btn-primary"><i class="bi bi-chat-dots-fill"></i> Komentar</a>
-                                </div>
+                <section class="container mt-4">
+                    <!-- Form pencarian -->
+                    <form action="" method="GET" class="mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Cari foto..." name="keyword">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </form>
+
+                    <!-- Galeri Foto -->
+                    <div class="card border-secondary mt-3">
+                        <div class="card-header bg-dark text-white">
+                            <h5><b>Galeri Foto</b></h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <?php
+                                // Include file koneksi.php
+                                include "koneksi.php";
+
+                                // Inisialisasi variabel keyword
+                                $keyword = "";
+
+                                // Cek apakah ada parameter keyword dari GET
+                                if (isset($_GET['keyword'])) {
+                                    // Ambil nilai keyword
+                                    $keyword = $_GET['keyword'];
+                                    // Modifikasi kueri SQL untuk mencari berdasarkan judul foto atau deskripsi foto
+                                    $sql = mysqli_query($conn, "SELECT * FROM foto,user WHERE foto.userid=user.userid AND (judulfoto LIKE '%$keyword%' OR deskripsifoto LIKE '%$keyword%')");
+                                } else {
+                                    // Jika tidak ada parameter keyword, ambil semua data foto
+                                    $sql = mysqli_query($conn, "SELECT * FROM foto,user WHERE foto.userid=user.userid");
+                                }
+
+                                // Loop untuk menampilkan data foto
+                                while ($data = mysqli_fetch_array($sql)) {
+                                ?>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card shadow-lg border-secondary">
+                                            <a href="gambar/<?= $data['lokasifile'] ?>" target="_blank">
+                                                <img src="gambar/<?= $data['lokasifile'] ?>" alt="<?= $data['judulfoto'] ?>" class="card-img-top" style="object-fit: cover; width: 100%; height: 200px;">
+                                            </a>
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?= $data['judulfoto'] ?></h5>
+                                                <p class="card-text"><?= $data['deskripsifoto'] ?></p>
+                                                <p class="card-text"><strong>Uploader: </strong><?= $data['namalengkap'] ?></p>
+                                                <p class="card-text"><strong>Jumlah Like: </strong>
+                                                    <?php
+                                                    // Hitung jumlah like foto
+                                                    $fotoid = $data['fotoid'];
+                                                    $sql2 = mysqli_query($conn, "SELECT * FROM likefoto WHERE fotoid='$fotoid'");
+                                                    echo mysqli_num_rows($sql2);
+                                                    ?>
+                                                </p>
+                                                <a href="like.php?fotoid=<?= $data['fotoid'] ?>" class="btn btn-danger"><i class="bi bi-heart-fill"></i> Like</a>
+                                                <a href="komentar.php?fotoid=<?= $data['fotoid'] ?>" class="btn btn-primary"><i class="bi bi-chat-dots-fill"></i> Komentar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
-
-                    <?php
-                    }
-                    ?>
-                </div>
-            </div>
-
-            
-        </div>
+                    </div>
+                </section>
+       
 
     </section>
-    
+
     <br>
-            <footer class="bg-dark text-white fixed-bottom text-center py-1">
-                <div class="container">
-                    <b>
-                        <p>&copy; 2024 XXKING Project</p>
-                    </b>
-                </div>
+    <footer class="bg-dark text-white fixed-bottom text-center py-1">
+        <div class="container">
+            <b>
+                <p>&copy; 2024 XXKING Project</p>
+            </b>
+        </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>

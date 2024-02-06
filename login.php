@@ -9,9 +9,7 @@
     <title>Halaman Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="shortcut icon" href="XXKING.png" type="image/x-icon">
-
 </head>
-
 
 <body>
     <style>
@@ -20,13 +18,11 @@
         }
 
         .card {
-
             border: 1px solid #e0e0e0;
             /* Card border color */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             /* Card box shadow */
         }
-
     </style>
 
     <section class="h-100">
@@ -37,6 +33,13 @@
                         <div class="card-body p-5">
                             <h4 class="text-center"><b>GALERI FOTO</h4>
                             <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
+                            <!-- Alert registrasi berhasil -->
+                            <?php if(isset($_GET['registrasi']) && $_GET['registrasi'] == 'sukses'): ?>
+                                <div id="alertRegistrasi" class="alert alert-success alert-dismissible fade show" role="alert">
+                                    Registrasi berhasil! Silakan login dengan akun yang sudah dibuat.
+                                    <button id="btnCloseAlert" type="button" class="btn-close" aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
                             <form method="POST" action="proses_login.php" class="needs-validation" novalidate="" autocomplete="off">
                                 <div class="mb-3">
                                     <label class="mb-2 text-muted" for="username">Username</label>
@@ -79,7 +82,17 @@
         </div>
     </section>
 
-    <script src="js/login.js"></script>
+    <script>
+        // JavaScript untuk menutup alert
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnCloseAlert = document.getElementById('btnCloseAlert');
+            const alertRegistrasi = document.getElementById('alertRegistrasi');
+            
+            btnCloseAlert.addEventListener('click', function () {
+                alertRegistrasi.style.display = 'none';
+            });
+        });
+    </script>
 </body>
 
 </html>
