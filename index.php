@@ -16,6 +16,47 @@
         color: #495057;
         font-family: sans-serif;
     }
+
+    .navbar {
+            margin-bottom: 20px; /* Tambahkan margin-bottom */
+        }
+
+    .alert {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        display: none;
+    }
+
+    .alert.success {
+        background-color: #4CAF50;
+    }
+
+    .alert.info {
+        background-color: #2196F3;
+    }
+
+    .alert.warning {
+        background-color: #ff9800;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
 </style>
 
 <body>
@@ -57,6 +98,26 @@
         ?>
     </nav>
 
+    <div id="alert" class="alert"></div>
+
+    <script>
+        // Ambil parameter dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        // Cek apakah ada parameter login=success
+        if (urlParams.has('login') && urlParams.get('login') === 'success') {
+            // Tampilkan alert berhasil login
+            showSuccessAlert("Login berhasil!");
+        }
+
+        function showSuccessAlert(message) {
+            // Tampilkan alert sukses
+            const alertDiv = document.getElementById('alert');
+            alertDiv.innerHTML = message + '<span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span>';
+            alertDiv.style.display = 'block';
+            alertDiv.classList.add('success');
+        }
+    </script>
+
     <section class="container mt-4 col-mb-4">
         <!-- Tambahkan margin-bottom di sini -->
         <h1>Halaman Home</h1>
@@ -66,73 +127,73 @@
 
         <p>Mari nikmati setiap detiknya, dan biarkan galeri foto ini menjadi perjalanan visual yang membawa Anda ke dalam dunia yang penuh warna dan keajaiban. Terima kasih telah berbagi momen-momen ini bersama kami. Selamat menikmati!</p>
 
-                <section class="container mt-4">
-                    <!-- Form pencarian -->
-                    <form action="" method="GET" class="mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Cari foto..." name="keyword">
-                            <button type="submit" class="btn btn-primary">Cari</button>
-                        </div>
-                    </form>
+        <section class="container mt-4">
+            <!-- Form pencarian -->
+            <form action="" method="GET" class="mb-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Cari foto..." name="keyword">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> </button>
+                </div>
+            </form>
 
-                    <!-- Galeri Foto -->
-                    <div class="card border-secondary mt-3">
-                        <div class="card-header bg-dark text-white">
-                            <h5><b>Galeri Foto</b></h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <?php
-                                // Include file koneksi.php
-                                include "koneksi.php";
+            <!-- Galeri Foto -->
+            <div class="card border-secondary mt-3">
+                <div class="card-header bg-dark text-white">
+                    <h5><b>Galeri Foto</b></h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <?php
+                        // Include file koneksi.php
+                        include "koneksi.php";
 
-                                // Inisialisasi variabel keyword
-                                $keyword = "";
+                        // Inisialisasi variabel keyword
+                        $keyword = "";
 
-                                // Cek apakah ada parameter keyword dari GET
-                                if (isset($_GET['keyword'])) {
-                                    // Ambil nilai keyword
-                                    $keyword = $_GET['keyword'];
-                                    // Modifikasi kueri SQL untuk mencari berdasarkan judul foto atau deskripsi foto
-                                    $sql = mysqli_query($conn, "SELECT * FROM foto,user WHERE foto.userid=user.userid AND (judulfoto LIKE '%$keyword%' OR deskripsifoto LIKE '%$keyword%')");
-                                } else {
-                                    // Jika tidak ada parameter keyword, ambil semua data foto
-                                    $sql = mysqli_query($conn, "SELECT * FROM foto,user WHERE foto.userid=user.userid");
-                                }
+                        // Cek apakah ada parameter keyword dari GET
+                        if (isset($_GET['keyword'])) {
+                            // Ambil nilai keyword
+                            $keyword = $_GET['keyword'];
+                            // Modifikasi kueri SQL untuk mencari berdasarkan judul foto atau deskripsi foto
+                            $sql = mysqli_query($conn, "SELECT * FROM foto,user WHERE foto.userid=user.userid AND (judulfoto LIKE '%$keyword%' OR deskripsifoto LIKE '%$keyword%')");
+                        } else {
+                            // Jika tidak ada parameter keyword, ambil semua data foto
+                            $sql = mysqli_query($conn, "SELECT * FROM foto,user WHERE foto.userid=user.userid");
+                        }
 
-                                // Loop untuk menampilkan data foto
-                                while ($data = mysqli_fetch_array($sql)) {
-                                ?>
-                                    <div class="col-md-4 mb-4">
-                                        <div class="card shadow-lg border-secondary">
-                                            <a href="gambar/<?= $data['lokasifile'] ?>" target="_blank">
-                                                <img src="gambar/<?= $data['lokasifile'] ?>" alt="<?= $data['judulfoto'] ?>" class="card-img-top" style="object-fit: cover; width: 100%; height: 200px;">
-                                            </a>
-                                            <div class="card-body">
-                                                <h5 class="card-title"><?= $data['judulfoto'] ?></h5>
-                                                <p class="card-text"><?= $data['deskripsifoto'] ?></p>
-                                                <p class="card-text"><strong>Uploader: </strong><?= $data['namalengkap'] ?></p>
-                                                <p class="card-text"><strong>Jumlah Like: </strong>
-                                                    <?php
-                                                    // Hitung jumlah like foto
-                                                    $fotoid = $data['fotoid'];
-                                                    $sql2 = mysqli_query($conn, "SELECT * FROM likefoto WHERE fotoid='$fotoid'");
-                                                    echo mysqli_num_rows($sql2);
-                                                    ?>
-                                                </p>
-                                                <a href="like.php?fotoid=<?= $data['fotoid'] ?>" class="btn btn-danger"><i class="bi bi-heart-fill"></i> Like</a>
-                                                <a href="komentar.php?fotoid=<?= $data['fotoid'] ?>" class="btn btn-primary"><i class="bi bi-chat-dots-fill"></i> Komentar</a>
-                                            </div>
-                                        </div>
+                        // Loop untuk menampilkan data foto
+                        while ($data = mysqli_fetch_array($sql)) {
+                        ?>
+                            <div class="col-md-4 mb-4">
+                                <div class="card shadow-lg border-secondary">
+                                    <a href="gambar/<?= $data['lokasifile'] ?>" target="_blank">
+                                        <img src="gambar/<?= $data['lokasifile'] ?>" alt="<?= $data['judulfoto'] ?>" class="card-img-top" style="object-fit: cover; width: 100%; height: 200px;">
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= $data['judulfoto'] ?></h5>
+                                        <p class="card-text"><?= $data['deskripsifoto'] ?></p>
+                                        <p class="card-text"><strong>Uploader: </strong><?= $data['namalengkap'] ?></p>
+                                        <p class="card-text"><strong>Jumlah Like: </strong>
+                                            <?php
+                                            // Hitung jumlah like foto
+                                            $fotoid = $data['fotoid'];
+                                            $sql2 = mysqli_query($conn, "SELECT * FROM likefoto WHERE fotoid='$fotoid'");
+                                            echo mysqli_num_rows($sql2);
+                                            ?>
+                                        </p>
+                                        <a href="like.php?fotoid=<?= $data['fotoid'] ?>" class="btn btn-danger"><i class="bi bi-heart-fill"></i> Like</a>
+                                        <a href="komentar.php?fotoid=<?= $data['fotoid'] ?>" class="btn btn-primary"><i class="bi bi-chat-dots-fill"></i> Komentar</a>
                                     </div>
-                                <?php
-                                }
-                                ?>
+                                </div>
                             </div>
-                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
-                </section>
-       
+                </div>
+            </div>
+        </section>
+
 
     </section>
 

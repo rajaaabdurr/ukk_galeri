@@ -16,9 +16,9 @@
             $_SESSION['namalengkap']=$data['namalengkap'];
 
         }
-        header("location:index.php");
+        header("location:index.php?login=success");
     }else{
-        header("location:login.php");
+        header("location:login.php?error=invalid");
     }
 
     

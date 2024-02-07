@@ -13,17 +13,16 @@ if (!isset($_SESSION['userid'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Edit Album</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="shortcut icon" href="XXKING.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-center py-2">
         <img src="XXKING.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top ml-3">
-
         <p class="text-white ms-4 ">Selamat datang <b><?= strtoupper($_SESSION['namalengkap']) ?></b></p>
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,9 +34,7 @@ if (!isset($_SESSION['userid'])) {
                 <li class="nav-item"><a class="nav-link text-white" href="logout.php"><b>Logout</b></a></li>
             </ul>
         </div>
-
     </nav>
-
 
     <div class="container mt-5">
         <style>
@@ -76,7 +73,7 @@ if (!isset($_SESSION['userid'])) {
         <center>
             <h1>Halaman Edit Album</h1>
         </center>
-        <form action="update_album.php" method="post">
+        <form id="edit_album_form" action="update_album.php" method="post">
             <?php
             include "koneksi.php";
             $albumid = $_GET['albumid'];
@@ -92,18 +89,41 @@ if (!isset($_SESSION['userid'])) {
                     <label for="deskripsi">Deskripsi</label>
                     <input type="text" class="form-control" name="deskripsi" value="<?= $data['deskripsi'] ?>">
                 </div>
-                <button type="submit" class="btn btn-success"><b><i class="bi bi-floppy"></i> Simpan</b></button>
+                <button type="button" class="btn btn-success" onclick="showConfirmAlert()"><i class="bi bi-floppy"></i><b> Simpan</b></button>
             <?php
             }
             ?>
         </form>
 
         <footer class="bg-dark text-white fixed-bottom text-center py-1">
-                <div class="container">
-                    <b><p>&copy; 2024 XXKING Project</p></b>
-                </div>
-            </footer>
-        </div>
+            <div class="container">
+                <b>
+                    <p>&copy; 2024 XXKING Project</p>
+                </b>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function showConfirmAlert() {
+            Swal.fire({
+                title: 'Apakah Anda yakin ingin menyimpan edit?',
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, simpan!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Jika pengguna mengonfirmasi, kirimkan formulir
+                    document.getElementById("edit_album_form").submit();
+                }
+            });
+        }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

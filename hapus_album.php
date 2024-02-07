@@ -6,5 +6,6 @@
 
     $sql=mysqli_query($conn,"delete from album where albumid='$albumid'");
 
-    header("location:album.php");
+    header("location:album.php?pesan=berhasilhapus");
+    
 ?>
