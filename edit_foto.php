@@ -16,7 +16,11 @@ if (!isset($_SESSION['userid'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="shortcut icon" href="XXKING.png" type="image/x-icon">
+<<<<<<< HEAD
     <link rel="stylesheet" href="package/dist/sweetalert2.min.css">
+=======
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+>>>>>>> 23073ae38c33c93132a5e9c2ffe85a58e2dd3c71
 </head>
 
 <body>
@@ -146,7 +150,10 @@ if (!isset($_SESSION['userid'])) {
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<<<<<<< HEAD
     <script src="package/dist/sweetalert2.min.js" ></script>
+=======
+>>>>>>> 23073ae38c33c93132a5e9c2ffe85a58e2dd3c71
     <script>
         function showConfirmAlert() {
             Swal.fire({

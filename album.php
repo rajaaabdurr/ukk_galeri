@@ -80,7 +80,11 @@ if (!isset($_SESSION['userid'])) {
                             <td><?= $data['tanggaldibuat'] ?></td>
                             <td>
                                 <a href="#" class="btn btn-danger" onclick="confirmDelete(<?= $data['albumid'] ?>)"><i class="bi bi-trash"></i><b> Hapus</b></a>
+<<<<<<< HEAD
                                 <a href="edit_album.php?albumid=<?= $data['albumid'] ?>" class="btn btn-primary text-white"><i class="bi bi-pencil-square"></i><b> Edit</b></a>
+=======
+                                <a href="edit_album.php?albumid=<?= $data['albumid'] ?>" class="btn btn-warning text-white"><i class="bi bi-pencil-square"></i><b> Edit</b></a>
+>>>>>>> 23073ae38c33c93132a5e9c2ffe85a58e2dd3c71
                             </td>
                         </tr>
                     <?php
@@ -98,6 +102,7 @@ if (!isset($_SESSION['userid'])) {
             </div>
         </footer>
     </div>
+<<<<<<< HEAD
     <!-- Tambahkan SweetAlert JS -->
     <script src="package/dist/sweetalert2.min.js"></script>
     <script>
@@ -116,6 +121,9 @@ if (!isset($_SESSION['userid'])) {
         }
     </script>
 
+=======
+
+>>>>>>> 23073ae38c33c93132a5e9c2ffe85a58e2dd3c71
     <!-- Tambahkan SweetAlert JS -->
     <script src="package/dist/sweetalert2.min.js"></script>
     <script>
@@ -138,7 +146,27 @@ if (!isset($_SESSION['userid'])) {
         }
     </script>
 
+<<<<<<< HEAD
     
+=======
+    <!-- Tambahkan SweetAlert JS -->
+    <script src="package/dist/sweetalert2.min.js"></script>
+    <script>
+        // Cek apakah parameter 'success' disertakan dalam URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const success = urlParams.get('success');
+
+        // Jika 'success' bernilai 'true', tampilkan alert berhasil
+        if (success === 'true') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Edit berhasil!',
+                showConfirmButton: false,
+                timer: 1500 // Durasi alert ditampilkan dalam milidetik (misalnya 1500 ms = 1,5 detik)
+            });
+        }
+    </script>
+>>>>>>> 23073ae38c33c93132a5e9c2ffe85a58e2dd3c71
 
     <!-- Scripts Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
