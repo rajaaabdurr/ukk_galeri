@@ -106,8 +106,6 @@
         color: black;
     }
 </style>
->>>>>>> 23073ae38c33c93132a5e9c2ffe85a58e2dd3c71
-
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-center py-2">

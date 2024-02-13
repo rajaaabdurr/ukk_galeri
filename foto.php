@@ -158,51 +158,27 @@ if (!isset($_SESSION['userid'])) {
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
-<<<<<<< HEAD
-=======
                     // Jika pengguna mengonfirmasi penghapusan, arahkan ke halaman hapus_album.php dengan mengirimkan albumId
->>>>>>> 23073ae38c33c93132a5e9c2ffe85a58e2dd3c71
                     window.location.href = 'hapus_foto.php?fotoid=' + fotoId;
                 }
             });
         }
-        
     </script>
-<<<<<<< HEAD
-        <script src="package/dist/sweetalert2.min.js"></script>
-        <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const success = urlParams.get('added');
-
-    if (success === 'true') {
-        Swal.fire({
-            icon: 'success',
-            title: 'Foto tambah berhasil!',
-            showConfirmButton: false,
-            timer: 1500 
-        });
-    }
-</script>
-
-=======
-        <!-- Tambahkan SweetAlert JS -->
-        <script src="package/dist/sweetalert2.min.js"></script>
+    <script src="package/dist/sweetalert2.min.js"></script>
     <script>
-        // Cek apakah parameter 'success' disertakan dalam URL
         const urlParams = new URLSearchParams(window.location.search);
-        const success = urlParams.get('success');
+        const success = urlParams.get('added');
 
-        // Jika 'success' bernilai 'true', tampilkan alert berhasil
         if (success === 'true') {
             Swal.fire({
                 icon: 'success',
-                title: 'Edit berhasil!',
+                title: 'Foto tambah berhasil!',
                 showConfirmButton: false,
-                timer: 1500 // Durasi alert ditampilkan dalam milidetik (misalnya 1500 ms = 1,5 detik)
+                timer: 1500
             });
         }
     </script>
->>>>>>> 23073ae38c33c93132a5e9c2ffe85a58e2dd3c71
+    <!-- Tambahkan SweetAlert JS -->
 
 </body>
 
