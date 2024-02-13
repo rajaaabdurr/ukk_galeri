@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2024 at 03:21 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.1.17
+-- Waktu pembuatan: 04 Feb 2024 pada 18.49
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `gallery`
+-- Database: `galeri`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `album`
+-- Struktur dari tabel `album`
 --
 
 CREATE TABLE `album` (
@@ -35,10 +35,22 @@ CREATE TABLE `album` (
   `userid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `album`
+--
+
+INSERT INTO `album` (`albumid`, `namaalbum`, `deskripsi`, `tanggaldibuat`, `userid`) VALUES
+(8, 'satwa liar', 'jenis satwa', '2024-01-22', 3),
+(12, 'satwa liar', 'jenis satwa', '2024-01-25', 2),
+(13, 'kopi', 'jenis kopi', '2024-01-29', 2),
+(14, 'ring', 'accessories', '2024-01-29', 3),
+(15, 'han so hee', 'beautiful', '2024-02-01', 2),
+(16, 'asesoris', 'accessories good', '2024-02-01', 5);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `foto`
+-- Struktur dari tabel `foto`
 --
 
 CREATE TABLE `foto` (
@@ -51,10 +63,20 @@ CREATE TABLE `foto` (
   `userid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `foto`
+--
+
+INSERT INTO `foto` (`fotoid`, `judulfoto`, `deskripsifoto`, `tanggalunggah`, `lokasifile`, `albumid`, `userid`) VALUES
+(6, 'singa', 'kucing', '2024-01-25', '484141910_1132495246_1483479186_878901431_singa.jpg', 12, 2),
+(8, 'cincin', 'sipp', '2024-01-29', '1408791431_360c255c-d255-4af7-af27-f8b84a36b7d8.jpeg', 14, 3),
+(10, 'han so hee', 'cantik', '2024-02-01', '637963466_a7a9d80f-6a28-44cb-8bcc-8f2fa969f938.jpeg', 15, 2),
+(12, 'kaset', 'testing', '2024-02-01', '1046632633_1633870839_download.jpeg', 16, 5);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `komentarfoto`
+-- Struktur dari tabel `komentarfoto`
 --
 
 CREATE TABLE `komentarfoto` (
@@ -65,10 +87,17 @@ CREATE TABLE `komentarfoto` (
   `tanggalkomentar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `komentarfoto`
+--
+
+INSERT INTO `komentarfoto` (`komentarid`, `fotoid`, `userid`, `isikomentar`, `tanggalkomentar`) VALUES
+(5, 8, 2, 'bagus', '2024-01-30');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `likefoto`
+-- Struktur dari tabel `likefoto`
 --
 
 CREATE TABLE `likefoto` (
@@ -78,10 +107,19 @@ CREATE TABLE `likefoto` (
   `tanggallike` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `likefoto`
+--
+
+INSERT INTO `likefoto` (`likeid`, `fotoid`, `userid`, `tanggallike`) VALUES
+(6, 6, 2, '2024-01-26'),
+(8, 8, 2, '2024-02-01'),
+(9, 10, 5, '2024-02-01');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -94,25 +132,28 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`userid`, `username`, `password`, `email`, `namalengkap`, `alamat`) VALUES
-(1, 'user1', '12345', 'user1@gmail.com', 'User 01', 'Kajen');
+(1, 'user1', '12345', 'user1@gmail.com', 'User 01', 'Kajen'),
+(2, 'raja', '1234', 'rajabae10@gmail.com', 'raja syah', 'dki jakarta'),
+(3, 'rehan', '1234', 'rajasyah@gmail.com', 'raihan ahmad', 'kontol'),
+(5, 'iqbal', '12345', 'farrasiqbal385@gmail.com', 'Farras Iqbal', 'botin');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `album`
+-- Indeks untuk tabel `album`
 --
 ALTER TABLE `album`
   ADD PRIMARY KEY (`albumid`),
   ADD KEY `userid` (`userid`);
 
 --
--- Indexes for table `foto`
+-- Indeks untuk tabel `foto`
 --
 ALTER TABLE `foto`
   ADD PRIMARY KEY (`fotoid`),
@@ -120,7 +161,7 @@ ALTER TABLE `foto`
   ADD KEY `userid` (`userid`);
 
 --
--- Indexes for table `komentarfoto`
+-- Indeks untuk tabel `komentarfoto`
 --
 ALTER TABLE `komentarfoto`
   ADD PRIMARY KEY (`komentarid`),
@@ -128,7 +169,7 @@ ALTER TABLE `komentarfoto`
   ADD KEY `userid` (`userid`);
 
 --
--- Indexes for table `likefoto`
+-- Indeks untuk tabel `likefoto`
 --
 ALTER TABLE `likefoto`
   ADD PRIMARY KEY (`likeid`),
@@ -136,71 +177,71 @@ ALTER TABLE `likefoto`
   ADD KEY `userid` (`userid`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`userid`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `album`
+-- AUTO_INCREMENT untuk tabel `album`
 --
 ALTER TABLE `album`
-  MODIFY `albumid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `albumid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `foto`
+-- AUTO_INCREMENT untuk tabel `foto`
 --
 ALTER TABLE `foto`
-  MODIFY `fotoid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `fotoid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `komentarfoto`
+-- AUTO_INCREMENT untuk tabel `komentarfoto`
 --
 ALTER TABLE `komentarfoto`
-  MODIFY `komentarid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `komentarid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `likefoto`
+-- AUTO_INCREMENT untuk tabel `likefoto`
 --
 ALTER TABLE `likefoto`
-  MODIFY `likeid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `likeid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `album`
+-- Ketidakleluasaan untuk tabel `album`
 --
 ALTER TABLE `album`
   ADD CONSTRAINT `album_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `foto`
+-- Ketidakleluasaan untuk tabel `foto`
 --
 ALTER TABLE `foto`
   ADD CONSTRAINT `foto_ibfk_1` FOREIGN KEY (`albumid`) REFERENCES `album` (`albumid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `foto_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `komentarfoto`
+-- Ketidakleluasaan untuk tabel `komentarfoto`
 --
 ALTER TABLE `komentarfoto`
   ADD CONSTRAINT `komentarfoto_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `komentarfoto_ibfk_2` FOREIGN KEY (`fotoid`) REFERENCES `foto` (`fotoid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `likefoto`
+-- Ketidakleluasaan untuk tabel `likefoto`
 --
 ALTER TABLE `likefoto`
   ADD CONSTRAINT `likefoto_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,

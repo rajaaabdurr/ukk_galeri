@@ -16,6 +16,7 @@ if (!isset($_SESSION['userid'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="shortcut icon" href="XXKING.png" type="image/x-icon">
+    <link rel="stylesheet" href="package/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -82,7 +83,7 @@ if (!isset($_SESSION['userid'])) {
                     <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
                         <div class="card shadow-lg mt-12">
                             <div class="card-body p-5">
-                                <form action="update_foto.php" method="post" enctype="multipart/form-data">
+                                <form id="edit_foto_form" action="update_foto.php" method="post" enctype="multipart/form-data">
                                     <?php
                                     include "koneksi.php";
                                     $fotoid = $_GET['fotoid'];
@@ -121,7 +122,8 @@ if (!isset($_SESSION['userid'])) {
                                         </select>
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-success"><b><i class="bi bi-floppy"></i> Simpan</b></button>
+                            <button type="button" class="btn btn-success" onclick="showConfirmAlert()"><b><i class="bi bi-floppy"></i> Simpan</b></button>
+
 
                         <?php
                                     }
@@ -135,14 +137,35 @@ if (!isset($_SESSION['userid'])) {
         </section>
         <br>
         <footer class="bg-dark text-white fixed-bottom text-center py-1">
-                <div class="container">
-                    <p>&copy; 2024 XXKING Project</p>
-                </div>
-            </footer>
+            <div class="container">
+                <p>&copy; 2024 XXKING Project</p>
+            </div>
+        </footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="package/dist/sweetalert2.min.js" ></script>
+    <script>
+        function showConfirmAlert() {
+            Swal.fire({
+                title: 'Apakah Anda yakin ingin menyimpan edit?',
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, simpan!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Jika pengguna mengonfirmasi, kirimkan formulir
+                    document.getElementById("edit_foto_form").submit();
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

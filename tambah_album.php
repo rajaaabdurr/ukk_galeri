@@ -9,5 +9,5 @@
 
     $sql=mysqli_query($conn,"insert into album values('','$namaalbum','$deskripsi','$tanggaldibuat','$userid')");
 
-    header("location:album.php");
+    header("location:album.php?added=true");
 ?>

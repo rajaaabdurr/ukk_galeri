@@ -8,5 +8,5 @@
 
     $sql=mysqli_query($conn,"update album set namaalbum='$namaalbum',deskripsi='$deskripsi' where albumid='$albumid'");
 
-    header("location:album.php");
+    header("location:album.php?success=true");
 ?>

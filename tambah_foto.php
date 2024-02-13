@@ -21,7 +21,7 @@
             $xx = $rand.'_'.$filename;
             move_uploaded_file($_FILES['lokasifile']['tmp_name'], 'gambar/'.$rand.'_'.$filename);
             mysqli_query($conn, "INSERT INTO foto VALUES(NULL,'$judulfoto','$deskripsifoto','$tanggalunggah','$xx','$albumid','$userid')");
-            header("location:foto.php");
+            header("location:foto.php?added=true");
         }else{
             header("location:foto.php");
         }

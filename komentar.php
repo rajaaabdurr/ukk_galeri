@@ -68,19 +68,22 @@ if (!isset($_SESSION['userid'])) {
             }
             ?>
         </form>
+        
 
-        <table class="table mt-4">
+        <table class="table table-bordered table-hover shadow-lg mt-4">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Nama</th>
                     <th>Komentar</th>
                     <th>Tanggal</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 include "koneksi.php";
+                
                 $userid = $_SESSION['userid'];
                 $sql = mysqli_query($conn, "select * from komentarfoto,user where komentarfoto.userid=user.userid");
                 while ($data = mysqli_fetch_array($sql)) {
@@ -90,6 +93,9 @@ if (!isset($_SESSION['userid'])) {
                         <td><?= $data['namalengkap'] ?></td>
                         <td><?= $data['isikomentar'] ?></td>
                         <td><?= $data['tanggalkomentar'] ?></td>
+                        <td>
+                        <a href="hapus_komentar.php?komentarid=<?= $data['komentarid'] ?>" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i><b> Hapus</b></a>
+                        </td>
                     </tr>
                 <?php
                 }
