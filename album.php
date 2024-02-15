@@ -81,7 +81,6 @@ if (!isset($_SESSION['userid'])) {
                             <td>
                                 <a href="#" class="btn btn-danger" onclick="confirmDelete(<?= $data['albumid'] ?>)"><i class="bi bi-trash"></i><b> Hapus</b></a>
                                 <a href="edit_album.php?albumid=<?= $data['albumid'] ?>" class="btn btn-primary text-white"><i class="bi bi-pencil-square"></i><b> Edit</b></a>
-                                <a href="edit_album.php?albumid=<?= $data['albumid'] ?>" class="btn btn-warning text-white"><i class="bi bi-pencil-square"></i><b> Edit</b></a>
                             </td>
                         </tr>
                     <?php
